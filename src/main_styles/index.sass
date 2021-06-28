@@ -7,12 +7,33 @@ body
   font-family: -apple-system, BlinkMacSystemFont
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+  // -------- If want to change scroll bar ----------
+  // overflow-x: hidden
+  // &.notScrollBar
+  //   &::-webkit-scrollbar
+  //     width: 0
+  //   &::-webkit-scrollbar-track
+  //     box-shadow: 0
+  //     background: #00000000
+  // &::-webkit-scrollbar
+  //   width: .75em
+
+  // &::-webkit-scrollbar-track
+  //   box-shadow: inset 0 0 6px #0e848850
+  //   background: #ddd
+
+  // &::-webkit-scrollbar-thumb
+  //   background-color: #0057ff99
+  //   border-radius: 20px
 
 a
   text-decoration: none !important
   color: $primary
+  cursor: pointer
 a:hover
   text-decoration: none !important
+p
+  color: #747171
 
 @keyframes fadeIn
   0%
