@@ -1,0 +1,55 @@
+@import ../../../main_styles/variables
+.errorInput
+  border-color: #f73838 !important
+  color: #fc5c5c !important
+  transition: all linear 0.3s
+.errorColor
+  color: #ff0000 !important
+  transition: color 0.3s linear
+.animatedInput
+  position: relative
+  label
+    position: absolute
+    top: 2px
+    cursor: text
+    font-size: 20px
+    margin: 10px
+    padding: 0 10px
+    color: $main
+    -webkit-transition: all .2s ease-in-out, font-size .2s ease-in-out
+    transition: all .2s ease-in-out, font-size .2s ease-in-out
+    &.active
+      top: -14px
+      font-size: 16px
+      font-weight: 600
+      background: #000000
+      // letter-spacing: 3px
+      color: $main
+  input
+    margin-top: 5px
+    width: 100%
+    padding: 20px
+    border: 3px solid darken($main, 15%)
+    font-size: 20px
+    font-weight: 500
+    background-color: #00000000
+    color: white
+    background: #00000000
+    border-radius: 5px
+    height: 40px
+    transition: border-color .3s linear
+    &.huge
+      height: 180px
+    &::-webkit-scrollbar
+      display: none
+
+    &::-webkit-scrollbar-track
+      display: none
+
+    &::-webkit-scrollbar-thumb
+      display: none
+    &:focus
+      outline: none
+      border-color: $main
+      transition: border-color .3s linear
+

@@ -1,0 +1,108 @@
+@import ../../main_styles/variables
+.text-main
+  color: $main
+.btn-contact
+  position: fixed
+  background: #06a0a5
+  color: #fff
+  bottom: 3vh
+  right: 3%
+  height: 60px
+  min-width: 60px
+  border: none
+  border-radius: 60px
+  transition: all linear .3s
+  &:hover
+    transition: all linear .3s
+    background: $main
+    box-shadow: 0px 2px 17px 5px rgba(0,0,0,0.99)
+    -webkit-box-shadow: 0px 2px 17px 5px rgba(0,0,0,0.99)
+    -moz-box-shadow: 0px 2px 17px 5px rgba(0,0,0,0.99)
+  i
+    font-size: 32px
+    transition: all 0.4s linear
+    &.fa-envelope-open
+      position: relative
+      transition: all 0.4s linear
+      top: -2px
+form
+  width: 550px
+  padding: 15px 55px 40px 55px
+  min-height: 70vh
+  z-index: 1
+  // border: 2px solid $main
+  border-radius: 15px
+  background: #000000bd
+  box-shadow: 0px 0px 5px 1px $main
+  -webkit-box-shadow: 0px 0px 5px 1px $main
+  -moz-box-shadow: 0px 0px 5px 1px $main
+  position: relative
+  .x
+    position: absolute
+    right: 15px
+    top: 10px
+    color: #ff0000
+    cursor: pointer
+    font-size: 32px
+  .btn-darkmain
+    width: 100%
+    border: 2px solid $main
+    color: $main
+    border-radius: 10px
+    background: #00000000
+    padding: 8px
+    margin-top: 30px
+    text-align: center
+    cursor: pointer
+    transition: all .3s linear
+    font-size: 20px
+    &:hover
+      transition: all .3s linear
+      border-color: lighten($main, 20%)
+      color: lighten($main, 20%)
+
+.underlineHover
+  display: inline-flex
+  flex-direction: column
+  margin-bottom: 12px
+  span
+    cursor: pointer
+    font-weight: 600
+    font-size: 18px
+    transition: color .3s linear
+    color: darken($main, 15%)
+    &.active
+      color: $main
+      transition: color .3s linear
+    &:hover
+      transition: color .3s linear
+      color: $main
+  &.active::after
+    width: 63px
+    background: $main
+  &:hover:after
+    width: 63px
+.underlineHover:after
+  background: none repeat scroll 0 0 transparent
+  bottom: 0
+  content: ""
+  display: block
+  height: 2px
+  // left: 50%
+  position: relative
+  background: $main
+  transition: width 0.3s ease 0s, left 0.3s ease 0s
+  width: 0
+  display: inline-block
+
+@media ( max-width: 700px  )
+  .formModal
+    form
+      width: 80%
+      padding: 15px 20px 40px 20px
+
+@media ( max-width: 400px  )
+  .formModal
+    form
+      width: 95%
+      padding: 15px 20px 40px 20px
