@@ -5,18 +5,26 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import LoginRegister from './pages/LoginRegister/LoginRegister';
+import Admin from './pages/Admin/Admin';
+import { UserProvider } from './context/userContext';
+import { ThemeProvider } from './context/CalendaryContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
-        <Route path="/login" exact >
-          <LoginRegister loginOrRegister="login" />
-        </Route>
-        <Route path="/register" exact >
-          <LoginRegister loginOrRegister="register" />
-        </Route>
-        <Route path="/" exact component={Home} />
+        <UserProvider>
+          <Route path="/login" exact >
+            <LoginRegister loginOrRegister="login" />
+          </Route>
+          <Route path="/register" exact >
+            <LoginRegister loginOrRegister="register" />
+          </Route>
+          <ThemeProvider>
+            <Route path="/adm" exact component={Admin} />
+            <Route path="/" exact component={Home} />
+          </ThemeProvider>
+        </UserProvider>
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,

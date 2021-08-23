@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { encrypt } from "../../helpers&hooks/encrypt";
 import { post } from "../../helpers&hooks/fetchHelper";
+import { url } from "../../helpers&hooks/useFetch";
 import AnimatedInput from "./animatedInput/animatedInput";
 import "./login&register.sass";
 function LoginRegisterForm({
@@ -16,7 +17,6 @@ function LoginRegisterForm({
   const [nombre, setNombre] = useState("");
   const [Error, setError] = useState<string | null>(null);
   const password2Ref = useRef<any>()
-  const url = process.env.REACT_APP_URL_BACKEND
   const registerEndPoint = "usuarios_registrar.php"
   const loginEndPoint = "usuarios_login.php"
   const registerLoginToken = process.env.REACT_APP_register_token
@@ -50,7 +50,6 @@ function LoginRegisterForm({
       })
       if (res.status === "error") {
         setError(res.result.error_msg)
-        console.log(res)
       } else {
         localStorage.setItem("_us", encrypt(JSON.stringify({
           id: res.result.UsuarioId,

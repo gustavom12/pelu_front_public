@@ -13,17 +13,13 @@ const customFetch = (url:string, options:any)=>{
   if(!options.body) delete options.body
   //if after 4 seg, backends didn't send any response, abort fetch
   setTimeout(()=> controller.abort(), 4000)
-  console.log(options.body);
   return fetch(url, options)
     .then(res=>
-          res.ok
-          ?
             res.json()
-          :
-            Promise.reject(res)
       )
     .catch(err=>{
-      return err.json()
+      console.warn(err)
+      return err
     })
 }
 
@@ -34,10 +30,10 @@ const post = (url: string, options:any = {}) => {
 }
 const put = (url: string, options:any = {}) => {
   options.method = "PUT"
-  customFetch(url,options)
+  return customFetch(url,options)
 }
 const del = (url: string, options:any = {}) => {
   options.method = "DELETE"
-  customFetch(url,options)
+  return customFetch(url,options)
 }
 export {get, post, put, del}

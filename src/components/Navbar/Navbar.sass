@@ -1,1 +1,36 @@
 .Navbar
+  height: 45px
+  width: 100%
+  border-bottom: 1.5px solid #ffffff99
+  position: absolute
+  top: 0
+  left: 0
+  padding: 0 5%
+  color: #fff
+  display: flex
+  align-items: center
+  justify-content: space-between
+  .fas
+    cursor: pointer
+    .toggle
+      // display: none
+      z-index: 999
+      position: absolute
+      right: 20px
+      top: 34px
+      border-radius: 6px
+      background: #fff
+      color: #000
+      width: 160px
+      transition: all linear 0.3s
+      max-height: 0
+      overflow: hidden
+      h6
+        border-bottom: 1px solid #ddd
+        padding: 10px 0
+    &:hover
+      .toggle
+        max-height: 90px
+        transition: all linear 0.3s
+
+

@@ -25,41 +25,42 @@
       position: relative
       transition: all 0.4s linear
       top: -2px
-form
-  width: 550px
-  padding: 15px 55px 40px 55px
-  min-height: 70vh
-  z-index: 1
-  // border: 2px solid $main
-  border-radius: 15px
-  background: #000000bd
-  box-shadow: 0px 0px 5px 1px $main
-  -webkit-box-shadow: 0px 0px 5px 1px $main
-  -moz-box-shadow: 0px 0px 5px 1px $main
-  position: relative
-  .x
-    position: absolute
-    right: 15px
-    top: 10px
-    color: #ff0000
-    cursor: pointer
-    font-size: 32px
-  .btn-darkmain
-    width: 100%
-    border: 2px solid $main
-    color: $main
-    border-radius: 10px
-    background: #00000000
-    padding: 8px
-    margin-top: 30px
-    text-align: center
-    cursor: pointer
-    transition: all .3s linear
-    font-size: 20px
-    &:hover
+.formModal
+  form
+    width: 550px
+    padding: 15px 55px 40px 55px
+    min-height: 70vh
+    z-index: 1
+    // border: 2px solid $main
+    border-radius: 15px
+    background: #000000bd
+    box-shadow: 0px 0px 5px 1px $main
+    -webkit-box-shadow: 0px 0px 5px 1px $main
+    -moz-box-shadow: 0px 0px 5px 1px $main
+    position: relative
+    .x
+      position: absolute
+      right: 15px
+      top: 10px
+      color: #ff0000
+      cursor: pointer
+      font-size: 32px
+    .btn-darkmain
+      width: 100%
+      border: 2px solid $main
+      color: $main
+      border-radius: 10px
+      background: #00000000
+      padding: 8px
+      margin-top: 30px
+      text-align: center
+      cursor: pointer
       transition: all .3s linear
-      border-color: lighten($main, 20%)
-      color: lighten($main, 20%)
+      font-size: 20px
+      &:hover
+        transition: all .3s linear
+        border-color: lighten($main, 20%)
+        color: lighten($main, 20%)
 
 .underlineHover
   display: inline-flex
