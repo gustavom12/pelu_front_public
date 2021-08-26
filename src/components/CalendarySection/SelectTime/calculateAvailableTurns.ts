@@ -1,39 +1,53 @@
 export default function AvailableTurns(duration: number, data: any) {
-  const config = data.config[0];
-  const turnos = data.turnos;
+  if (!data.config) return null;
+  const config = data?.config[0];
+  const turnos = data?.turnos;
   const intervalsAvailables: number[] = [];
   const intervalosEnUso: number[] = [];
   const turnosDisponibles: number[] = [];
-  if (config.desde_1 !== '00:00:00' && config.hasta_1 !== '00:00:00') {
-    pushAvailableHours(config.desde_!, config.hasta_1, intervalsAvailables);
+  let finishHour = 0;
+  if (config?.desde !== '00:00:00' && config?.hasta !== '00:00:00') {
+    pushAvailableHours(config?.desde, config?.hasta, intervalsAvailables);
+    finishHour = Number(config?.hasta?.replaceAll(':', ''));
   }
-  if (config.desde !== '00:00:00' && config.hasta !== '00:00:00') {
-    pushAvailableHours(config.desde, config.hasta, intervalsAvailables);
+  if (config?.desde_1 !== '00:00:00' && config?.hasta_1 !== '00:00:00') {
+    pushAvailableHours(config?.desde_1, config?.hasta_1, intervalsAvailables);
+    finishHour = Number(config?.hasta_1?.replaceAll(':', ''));
   }
-  turnos.forEach((turno: any) => {
+  turnos?.forEach((turno: any) => {
     const turnoDesde = Number(turno?.hora?.replaceAll(':', ''));
     const turnoDuracion = turno.duracion_minutos * 100;
     let interval = turnoDesde;
+    intervalosEnUso.push(interval);
     while (interval < turnoDesde + turnoDuracion) {
-      if (interval % 10000 === 5000) interval += 5000;
-      else interval += 1000;
       intervalosEnUso.push(interval);
+      interval % 10000 === 5000 ? (interval += 5000) : (interval += 1000);
     }
   });
-  for (let i = 0; i < intervalsAvailables.length; i += (duration / 10)) {
+  for (let i = 0; i < intervalsAvailables.length; ) {
     let intervaloDisponible = true;
-    for(let j = 1; j <= (duration / 10); j++){
-      if(intervalosEnUso.includes(intervalsAvailables[i + j])){
-        intervaloDisponible = false
+    for (let j = 0; j < duration / 10; j++) {
+      if (
+        intervalosEnUso.includes(intervalsAvailables[i + j]) ||
+        intervalsAvailables[i + j] > finishHour
+      ) {
+        intervaloDisponible = false;
         break;
       }
     }
-    if(intervaloDisponible)turnosDisponibles.push(intervalsAvailables[i])
+    if (intervaloDisponible) {
+      turnosDisponibles.push(intervalsAvailables[i]);
+      i += duration / 10;
+    } else i++;
   }
-  return turnosDisponibles
+  return turnosDisponibles;
 }
 
-function pushAvailableHours(desde: string, hasta: string, intervalsAvailables:number[]) {
+function pushAvailableHours(
+  desde: string,
+  hasta: string,
+  intervalsAvailables: number[]
+) {
   const inNumberDesde = Number(desde?.replaceAll(':', ''));
   const inNumberHasta = Number(hasta?.replaceAll(':', ''));
   let actualInterval = inNumberDesde;

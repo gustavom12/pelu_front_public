@@ -1,30 +1,45 @@
-import { createContext, useEffect } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { decrypt } from '../helpers&hooks/encrypt';
-import { url, useFetchPost } from '../helpers&hooks/useFetch';
+import { post } from '../helpers&hooks/fetchHelper';
+import { url, } from '../helpers&hooks/useFetch';
 
 const userContext = createContext({
   user: null,
 });
 const UserProvider = ({ children }: { children: any }) => {
-  const { data, error, Post } = useFetchPost()
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const userEncrypted = localStorage.getItem("_us")
-    if (!userEncrypted) return;
-    if (!decrypt(userEncrypted)) return;
+    if (!userEncrypted) {
+      setLoading(false)
+      return;
+    }
+    if (!decrypt(userEncrypted)) {
+      setLoading(false)
+      return;
+    }
     const userLocalstorage = JSON.parse(decrypt(userEncrypted))
-    console.log(userLocalstorage)
     const registerLoginToken = process.env.REACT_APP_register_token
     const body = {
       email: userLocalstorage.email,
       password: userLocalstorage.password,
       token: registerLoginToken
     }
-    const Async = async () =>{
-      await Post({ url: `${url}usuarios_login.php`, body })}
+    const Async = async () => {
+      const data = await post(`${url}usuarios_login.php`, { body })
+      if (data.status === "ok") setUser(data.result)
+      else {
+        setUser(null)
+        setError(data)
+      }
+      setLoading(false)
+    }
     Async()
-  }, [Post])
+  }, [])
 
-  const value = { user: data?.result, error };
+  const value = { user, error, loading };
 
   return <userContext.Provider value={value}>{children}</userContext.Provider>;
 };

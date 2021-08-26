@@ -41,14 +41,8 @@ function LoginRegisterForm({
         telefono,
         nombre
       }
-      const res = await post(`${url}${registerEndPoint}`, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: user
-      })
-      if (res.status === "error") {
+      const res = await post(`${url}${registerEndPoint}`, {body: user})
+      if (res.status === "error" || res.err) {
         setError(res.result.error_msg)
       } else {
         localStorage.setItem("_us", encrypt(JSON.stringify({
@@ -66,13 +60,8 @@ function LoginRegisterForm({
         password,
         token: registerLoginToken
       }
-      const res = await post(`${url}${loginEndPoint}`, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: user
-      })
+      const res = await post(`${url}${loginEndPoint}`, {body: user})
+      console.log(res)
       if (res.status === "error") {
         setError(res.result.error_msg)
       } else {

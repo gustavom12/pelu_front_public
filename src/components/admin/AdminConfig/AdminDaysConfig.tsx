@@ -24,7 +24,7 @@ const AdminDayConfig = () => {
     setWeek([...week])
   }
   useEffect(() => {
-    if (Array.isArray(  previousConfig.data)) {
+    if (Array.isArray(previousConfig.data) && previousConfig?.data?.length > 0) {
       if(!firstRender)return;
       setFirstRender(false)
       const configCloned = { ...previousConfig }
@@ -41,7 +41,6 @@ const AdminDayConfig = () => {
       })
       setWeek(weekParsed)
     }
-
   }, [previousConfig,firstRender])
   const removeTurn = (DayIndex: number, turnIndex: number) => {
     setWeek((week: any) => {
@@ -69,6 +68,7 @@ const AdminDayConfig = () => {
       day.intervalo = "15"
       return day
     })
+    console.log(weekParsed)
     Post({ url: `${url}configuracion_registrar`, body: weekParsed })
   }
   return (

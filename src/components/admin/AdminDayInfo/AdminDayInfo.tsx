@@ -7,12 +7,12 @@ const AdminDayInfo = () => {
   const { Post } = useFetchPost()
   const [turns, setTurns] = useState<any>(null);
   const { selectedDay, } = useContext<any>(ThemeContext)
-  const fecha = selectedDay.format("yyyy/MM/DD")
+  const fecha = selectedDay.format("yyyy-MM-DD")
   let dia = selectedDay.day()
   if (dia === 0) dia = 7
   const [endpoint, setEndpoint] = useState(`${url}fecha_turnos_config.php?fecha="${fecha}"&dia="${dia}"`);
   useEffect(() => {
-    const fechaSelected = selectedDay.format("yyyy/MM/DD")
+    const fechaSelected = selectedDay.format("yyyy-MM-DD")
     let diaDeLaSemana = selectedDay.day()
     if (diaDeLaSemana === 0) diaDeLaSemana = 7
     setEndpoint(`${url}fecha_turnos_config.php?fecha="${fechaSelected}"&dia="${diaDeLaSemana}"`)
@@ -27,14 +27,14 @@ const AdminDayInfo = () => {
     <div className="AdminDayInfo d-flex aling-items-center flex-column">
       <h3 className="fw-bold text-center">Turnos </h3>
       <h5 className="text-serif2 text-center"> {selectedDay.clone().format("DD")}/{selectedDay.format("MM")} </h5>
-      {
+      { data?.config &&
         data?.config[0]?.hasta === "00:00:00" ? null :
           <div className="flex justify-content-around">
             <h6> <span>Desde:</span> {data?.config[0]?.desde.substring(0, 5)}</h6>
             <h6> <span>Hasta:</span> {data?.config[0]?.hasta.substring(0, 5)}</h6>
           </div>
       }
-      {
+      { data?.config &&
         data?.config[0]?.hasta_1 === "00:00:00" ? null :
           <div className="flex justify-content-around">
             <h6> <span>Desde:</span> {data?.config[0]?.desde_1.substring(0, 5)}</h6>

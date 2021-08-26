@@ -3,7 +3,7 @@ import React, { } from "react";
 function DayConfig({ day, removeTurn, i, addTurn, onValueChange }: { day: any, removeTurn: any, i: number, addTurn: any, onValueChange: any }) {
   return (
     <div className="d-flex day mb-3">
-      <h5 className="fw-bold"> {day.nombre.substring(0,3)} </h5>
+      <h5 className="fw-bold"> {day.nombre?.substring(0,3)} </h5>
       <div>
         {
           !day.turnos.length ?

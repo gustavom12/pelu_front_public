@@ -6,11 +6,11 @@ import bgIMG from "../../assets/images/loginIMG.jpg"
 import CalendarySection from '../../components/CalendarySection/CalendarySection';
 import userContext from '../../context/userContext';
 import Navbar from '../../components/Navbar/Navbar';
-import appConfig from '../../config';
 import { TurnResponseProvider } from '../../context/turnResponseContext';
 import MyTurns from '../../components/MyTurns/MyTurns';
+import { Redirect } from 'react-router';
 const Home = () => {
-  const { user } = useContext<any>(userContext)
+  const { user, loading } = useContext<any>(userContext)
   const [myTurnsDiv, setMyTurnsDiv] = useState(false);
   useEffect(() => {
     //delete loader after DOM loaded
@@ -26,23 +26,15 @@ const Home = () => {
 
   return (
     <main className="Home flex" style={{ backgroundImage: `url(${bgIMG})` }}>
-      {user && user?.RoleId === "2" ?
-        <>
-          <TurnResponseProvider>
-            {myTurnsDiv && <MyTurns setModal={setMyTurnsDiv} />}
-            <Navbar setModal={setMyTurnsDiv}/>
-            <CalendarySection />
-          </TurnResponseProvider>
-        </>
-        : appConfig.onProduction ?
-          null :
-          <>
-            <TurnResponseProvider>
-              {myTurnsDiv && <MyTurns setModal={setMyTurnsDiv} />}
-              <Navbar setModal={setMyTurnsDiv}/>
-              <CalendarySection />
-            </TurnResponseProvider>
-          </>
+      {!user && !loading && <Redirect to="/register"/>}
+      {user?.RoleId === "1" ?
+        <Redirect to="/adm" />
+        :
+        <TurnResponseProvider>
+          {myTurnsDiv && <MyTurns setModal={setMyTurnsDiv} />}
+          <Navbar setModal={setMyTurnsDiv} />
+          <CalendarySection />
+        </TurnResponseProvider>
       }
     </main>
   )

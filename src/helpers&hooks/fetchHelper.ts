@@ -18,7 +18,7 @@ const customFetch = (url:string, options:any)=>{
             res.json()
       )
     .catch(err=>{
-      console.warn(err)
+      console.warn({err})
       return err
     })
 }

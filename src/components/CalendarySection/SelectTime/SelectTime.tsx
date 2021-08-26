@@ -4,15 +4,16 @@ import TurnResponseContext from '../../../context/turnResponseContext';
 import useFetch, { url } from '../../../helpers&hooks/useFetch';
 import Loader from '../../a_minicomponents/loader/loader';
 import AvailableTurns from './calculateAvailableTurns';
-const SelectTime = ({ selectedType, selectedTime, setSelectedTime}: { selectedType?: any, selectedTime: any, setSelectedTime: any}) => {
+const SelectTime = ({ selectedType, selectedTime, setSelectedTime }: { selectedType?: any, selectedTime: any, setSelectedTime: any }) => {
   const { selectedDay } = useContext<any>(ThemeContext)
-  const fecha = selectedDay.format("yyyy/MM/DD")
+  const fecha = selectedDay.format("yyyy-MM-DD")
   let dia = selectedDay.day()
+  if (dia === 0) dia = 7
   const [endpoint, setEndpoint] = useState(`${url}fecha_turnos_config.php?fecha="${fecha}"&dia="${dia}"`);
   const turnPostedData = useContext<any>(TurnResponseContext)
   const { data, loading } = useFetch(endpoint)
   useEffect(() => {
-    const fechaSelected = selectedDay.format("yyyy/MM/DD")
+    const fechaSelected = selectedDay.format("yyyy-MM-DD")
     let diaDeLaSemana = selectedDay.day()
     if (diaDeLaSemana === 0) diaDeLaSemana = 7
     setEndpoint(`${url}fecha_turnos_config.php?fecha="${fechaSelected}"&dia="${diaDeLaSemana}"`)
