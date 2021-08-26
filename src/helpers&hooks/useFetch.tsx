@@ -3,7 +3,7 @@ import appConfig from "../config"
 import { get, post } from "./fetchHelper"
 
 export const url = appConfig.onProduction ? appConfig.backendUrlProduction : appConfig.backendUrl
-
+console.log(url)
 const useFetch = (url: string, options?: any) => {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)

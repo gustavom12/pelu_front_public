@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import TurnResponseContext from '../../../context/turnResponseContext';
-import useFetch from '../../../helpers&hooks/useFetch';
+import useFetch, { url } from '../../../helpers&hooks/useFetch';
 const SelectType = ({ selectedType, setSelectedType }: { selectedType: any, setSelectedType: any }) => {
-  const { data }: { data: any, loading: boolean } = useFetch("http://localhost/apipelu/categorias_listar.php")
+  const { data }: { data: any, loading: boolean } = useFetch(`${url}categorias_listar.php`)
   const turnPostedData = useContext<any>(TurnResponseContext)
   useEffect(() => {
     if (!data) return;
