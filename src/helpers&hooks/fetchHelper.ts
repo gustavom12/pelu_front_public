@@ -13,7 +13,6 @@ const customFetch = (url:string, options:any)=>{
   if(!options.body) delete options.body
   //if after 4 seg, backends didn't send any response, abort fetch
   setTimeout(()=> controller.abort(), 4000)
-  console.log(url)
   return fetch(url, options)
     .then(res=>
             res.json()

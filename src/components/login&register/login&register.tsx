@@ -60,9 +60,7 @@ function LoginRegisterForm({
         password,
         token: registerLoginToken
       }
-      console.log(registerLoginToken)
       const res = await post(`${url}${loginEndPoint}`, {body: user})
-      console.log(res, registerLoginToken)
       if (res.status === "error") {
         setError(res.result.error_msg)
       } else {
